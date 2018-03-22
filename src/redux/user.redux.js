@@ -21,7 +21,7 @@ export function user(state=initState,action) {
 			return {...state,isAuth:false,msg:action.msg};
 		break;
 		default:
-		return state;
+			return state;
 	}
 }
 

@@ -28,7 +28,7 @@ class Register extends Component {
 		})
 	}
 	handleClick() {
-		console.log(this.props)
+		// console.log(this.props)
 		this.props.register(this.state)
 	}
 	render() {
