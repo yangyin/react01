@@ -1,5 +1,6 @@
 const express = require('express');
 const Router = express.Router();
+const utils = require('utility');
 
 
 const model = require('./model')
@@ -21,7 +22,7 @@ Router.post('/register',function(req,res) {
 		if(doc) {
 			return res.json({code:1,msg:'用户名重复'})
 		}
-		User.create({user,psd,type},function(e,d) {
+		User.create({user,type,psd:md5Psd(psd)},function(e,d) {
 			if(e) {
 				return res.json({code:1,msg:'后端出错了'})
 			} else {
@@ -30,5 +31,10 @@ Router.post('/register',function(req,res) {
 		})
 	})
 })
+
+function md5Psd(psd) {
+	const salt = 'adsfasdgfxsfg~~';
+	return utils.md5(utils.md5(psd+salt))
+}
 
 module.exports = Router;
